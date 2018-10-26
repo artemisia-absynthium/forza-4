@@ -1,83 +1,83 @@
 @import url("https://fonts.googleapis.com/css?family=Nunito:900|Quicksand");
 
 body {
-    background-color: #282c34;
-    color: white;
-    font-family: "Quicksand", sans-serif;
+  background-color: #282c34;
+  color: white;
+  font-family: "Quicksand", sans-serif;
 }
 
 .App {
-    min-height: 76vh;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+  min-height: 76vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .App-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    font-family: "Nunito", sans-serif;
-    font-weight: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  font-family: "Nunito", sans-serif;
+  font-weight: 900;
 }
 
 .App-link {
-    color: #61dafb;
+  color: #61dafb;
 }
 
 .App-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 1vmin);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
 }
 
 .pawn {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .redcolor {
-    color: red;
+  color: red;
 }
 
 .yellowcolor {
-    color: yellow;
+  color: yellow;
 }
 
 table.board {
-    border: 5px solid steelblue;
-    background: steelblue;
+  border: 5px solid steelblue;
+  background: steelblue;
 }
 
 .circle {
-    width: 50px;
-    height: 50px;
-    background: #282c34;
-    border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background: #282c34;
+  border-radius: 50%;
 }
 
 .circle.redbg {
-    background: red;
+  background: red;
 }
 
 .circle.yellowbg {
-    background: yellow;
+  background: yellow;
 }
 
 button {
-    background-color: steelblue;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 12px;
-    cursor: pointer;
+  background-color: steelblue;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
 }
