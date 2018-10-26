@@ -37,34 +37,47 @@ body {
     font-size: calc(10px + 1vmin);
 }
 
-.Pawn {
+.pawn {
     cursor: pointer;
 }
 
-.RedPlayer {
+.redcolor {
     color: red;
 }
 
-.YellowPlayer {
+.yellowcolor {
     color: yellow;
 }
 
 table.board {
-  border: 5px solid steelblue;
-  background: steelblue;
+    border: 5px solid steelblue;
+    background: steelblue;
 }
 
 .circle {
-  width: 50px;
-  height: 50px;
-  background: #282c34;
-  border-radius: 50%
+    width: 50px;
+    height: 50px;
+    background: #282c34;
+    border-radius: 50%;
 }
 
-.circle.red {
-  background: red;
+.circle.redbg {
+    background: red;
 }
 
-.circle.yellow {
-  background: yellow;
+.circle.yellowbg {
+    background: yellow;
+}
+
+button {
+    background-color: steelblue;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
 }
