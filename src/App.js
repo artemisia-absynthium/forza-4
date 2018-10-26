@@ -188,7 +188,7 @@ class App extends Component {
 
     render() {
         return (
-            <>
+            <React.Fragment>
                 <Board board={this.state.board} handleMove={this.handleMove} />
                 <br />
                 <h3>
@@ -204,7 +204,7 @@ class App extends Component {
                     show={!this.state.inGame}
                     handleClick={this.newGame}
                 />
-            </>
+            </React.Fragment>
         );
     }
 }
