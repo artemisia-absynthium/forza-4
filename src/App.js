@@ -19,6 +19,8 @@ class App extends Component {
     this.newGame = this.newGame.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.fillColumn = this.fillColumn.bind(this);
+    this.countPawns = this.countPawns.bind(this);
+    this.countPawnsRecursive = this.countPawnsRecursive.bind(this);
   }
 
   initState() {
@@ -69,7 +71,7 @@ class App extends Component {
     let pawns = this.state.board;
     for (let i = 0; i < pawns.length; i++) {
       for (let j = 0; j < pawns[i].length; j++) {
-        if (this.countPawns(pawns, i, j, 0)) {
+        if (this.countPawns(i, j)) {
           return true;
         }
       }
@@ -77,89 +79,56 @@ class App extends Component {
     return false;
   }
 
-  countPawns(pawns, row, column) {
-    let pawn = pawns[row][column];
+  countPawns(row, column) {
+    let pawn = this.state.board[row][column];
     return (
       pawn !== 0 &&
-      (this.countPawnsInRow(pawns, row, column + 1, pawn, 1) ||
-        this.countPawnsInColumn(pawns, row + 1, column, pawn, 1) ||
-        this.countPawnsInDownwardDiagonal(
-          pawns,
-          row + 1,
-          column + 1,
-          pawn,
-          1
-        ) ||
-        this.countPawnsInUpwardDiagonal(pawns, row - 1, column + 1, pawn, 1))
+      (this.countPawnsRecursive(row, column, "horizontal", pawn, 0) ||
+      this.countPawnsRecursive(row, column, "vertical", pawn, 0) ||
+      this.countPawnsRecursive(row, column, "downdiagonal", pawn, 0) ||
+      this.countPawnsRecursive(row, column, "updiagonal", pawn, 0))
     );
   }
 
-  countPawnsInRow(pawns, row, column, pawnType, pawnsCount) {
-    if (pawnsCount === winCondition) {
+  countPawnsRecursive(row, column, direction, color, pawns) {
+    let pawn = this.state.board[row][column];
+    let count = pawn === 0 || pawn !== color ? 0 : pawns + 1;
+    if (count === winCondition) {
       return true;
     }
-    if (column >= pawns[row].length) {
+    let nextRow = this.getNextRow(row, direction);
+    let nextColumn = this.getNextColumn(column, direction);
+    if (nextRow < 0 || nextRow >= this.state.board.length || nextColumn < 0 || nextColumn >= this.state.board[row].length) {
       return false;
     }
-    let pawn = pawns[row][column];
-    return (
-      pawn === pawnType &&
-      this.countPawnsInRow(pawns, row, column + 1, pawn, pawnsCount + 1)
-    );
+    return this.countPawnsRecursive(nextRow, nextColumn, direction, pawn, count);
   }
 
-  countPawnsInColumn(pawns, row, column, pawnType, pawnsCount) {
-    if (pawnsCount === winCondition) {
-      return true;
+  getNextRow(row, direction) {
+    switch (direction) {
+      case "horizontal":
+        return row;
+      case "vertical":
+      case "downdiagonal":
+        return row + 1;
+      case "updiagonal":
+        return row - 1;
+      default:
+        throw new IllegalArgumentException("Unknown direction: '" + direction + "'");
     }
-    if (row >= pawns.length) {
-      return false;
-    }
-    let pawn = pawns[row][column];
-    return (
-      pawn === pawnType &&
-      this.countPawnsInColumn(pawns, row + 1, column, pawn, pawnsCount + 1)
-    );
   }
 
-  countPawnsInDownwardDiagonal(pawns, row, column, pawnType, pawnsCount) {
-    if (pawnsCount === winCondition) {
-      return true;
+  getNextColumn(column, direction) {
+    switch (direction) {
+      case "vertical":
+        return column;
+      case "horizontal":
+      case "downdiagonal":
+      case "updiagonal":
+        return column + 1;
+      default:
+        throw new IllegalArgumentException("Unknown direction: '" + direction + "'");
     }
-    if (row >= pawns.length || column >= pawns[row].length) {
-      return false;
-    }
-    let pawn = pawns[row][column];
-    return (
-      pawn === pawnType &&
-      this.countPawnsInDownwardDiagonal(
-        pawns,
-        row + 1,
-        column + 1,
-        pawn,
-        pawnsCount + 1
-      )
-    );
-  }
-
-  countPawnsInUpwardDiagonal(pawns, row, column, pawnType, pawnsCount) {
-    if (pawnsCount === winCondition) {
-      return true;
-    }
-    if (row < 0 || row >= pawns.length || column >= pawns[row].length) {
-      return false;
-    }
-    let pawn = pawns[row][column];
-    return (
-      pawn === pawnType &&
-      this.countPawnsInUpwardDiagonal(
-        pawns,
-        row - 1,
-        column + 1,
-        pawn,
-        pawnsCount + 1
-      )
-    );
   }
 
   newGame() {
@@ -196,6 +165,11 @@ function RestartButton(props) {
       New Game
     </button>
   );
+}
+
+function IllegalArgumentException(message) {
+  this.message = message;
+  this.name = "IllegalArgumentException";
 }
 
 export default App;
