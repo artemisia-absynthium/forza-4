@@ -59,6 +59,30 @@ describe("forza 4 stateless", () => {
     ];
     expect(app.endGame()).toBe(true);
   });
+
+  it("doesn't win", () => {
+    app.state.board = [
+      [1, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0]
+    ];
+    expect(app.endGame()).toBe(false);
+  });
+
+  it("doesn't win 2", () => {
+    app.state.board = [
+      [1, 2, 2, 2, 0, 0, 0],
+      [2, 1, 1, 1, 0, 0, 0],
+      [2, 0, 2, 0, 0, 0, 0],
+      [2, 0, 0, 2, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0]
+    ];
+    expect(app.endGame()).toBe(false);
+  });
 });
 
 describe("forza 4 stateful", () => {
