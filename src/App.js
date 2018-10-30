@@ -19,7 +19,6 @@ class App extends Component {
     this.newGame = this.newGame.bind(this);
     this.handleMove = this.handleMove.bind(this);
     this.fillColumn = this.fillColumn.bind(this);
-    this.fillColumnRecursive = this.fillColumnRecursive.bind(this);
   }
 
   initState() {
@@ -41,7 +40,7 @@ class App extends Component {
     if (!this.state.inGame) {
       return;
     }
-    this.fillColumn(column);
+    this.fillColumn(column, this.state.board.length - 1);
     if (this.endGame()) {
       this.setState({ inGame: false });
     } else {
@@ -51,18 +50,14 @@ class App extends Component {
     }
   }
 
-  fillColumn(column) {
-    this.fillColumnRecursive(column, this.state.board.length - 1);
-  }
-
-  fillColumnRecursive(column, row) {
+  fillColumn(column, row) {
     if (row < 0) {
       throw new BoardOutOfBoundsException(
         "Row must be a value between 0 and " + this.state.rows
       );
     }
     if (this.state.board[row][column] !== 0) {
-      this.fillColumnRecursive(column, row - 1);
+      this.fillColumn(column, row - 1);
       return;
     }
     let board = this.state.board;
