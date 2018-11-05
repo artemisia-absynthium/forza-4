@@ -37,8 +37,20 @@ body {
   font-size: calc(10px + 1vmin);
 }
 
+.board {
+  display: flex;
+  flex-direction: column;
+  border: 5px solid steelblue;
+  background: steelblue;
+}
+
+.row {
+  display: flex;
+}
+
 .pawn {
   cursor: pointer;
+  margin: 3px;
 }
 
 .redcolor {
@@ -47,11 +59,6 @@ body {
 
 .yellowcolor {
   color: yellow;
-}
-
-table.board {
-  border: 5px solid steelblue;
-  background: steelblue;
 }
 
 .circle {
