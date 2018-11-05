@@ -36,6 +36,7 @@
     "moduleNameMapper": {
       "\\.(css|sass)$": "<rootDir>/__mocks__/styleMock.js"
     },
+    "clearMocks": true,
     "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js"
   }
 }
