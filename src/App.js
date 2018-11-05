@@ -75,57 +75,46 @@ class App extends Component {
         "right",
         pawn,
         0
-      ) +
-        this.countConsecutivePawns(
-          this.getNextRow(row, "left"),
-          this.getNextColumn(column, "left"),
-          "left",
-          pawn,
-          0
-        ) +
-        1 ===
-        winCondition ||
+      ) + this.countConsecutivePawns(
+        this.getNextRow(row, "left"),
+        this.getNextColumn(column, "left"),
+        "left",
+        pawn,
+        0
+      ) + 1 === winCondition ||
       this.countConsecutivePawns(
         this.getNextRow(row, "vertical"),
         this.getNextColumn(column, "vertical"),
         "vertical",
         pawn,
         0
-      ) +
-        1 ===
-        winCondition ||
+      ) + 1 === winCondition ||
       this.countConsecutivePawns(
         this.getNextRow(row, "downdiagonalleft"),
         this.getNextColumn(column, "downdiagonalleft"),
         "downdiagonalleft",
         pawn,
         0
-      ) +
-        this.countConsecutivePawns(
-          this.getNextRow(row, "downdiagonalright"),
-          this.getNextColumn(column, "downdiagonalright"),
-          "downdiagonalright",
-          pawn,
-          0
-        ) +
-        1 ===
-        winCondition ||
+      ) + this.countConsecutivePawns(
+        this.getNextRow(row, "downdiagonalright"),
+        this.getNextColumn(column, "downdiagonalright"),
+        "downdiagonalright",
+        pawn,
+        0
+      ) + 1 === winCondition ||
       this.countConsecutivePawns(
         this.getNextRow(row, "updiagonalleft"),
         this.getNextColumn(column, "updiagonalleft"),
         "updiagonalleft",
         pawn,
         0
-      ) +
-        this.countConsecutivePawns(
-          this.getNextRow(row, "updiagonalright"),
-          this.getNextColumn(column, "updiagonalright"),
-          "updiagonalright",
-          pawn,
-          0
-        ) +
-        1 ===
-        winCondition
+      ) + this.countConsecutivePawns(
+        this.getNextRow(row, "updiagonalright"),
+        this.getNextColumn(column, "updiagonalright"),
+        "updiagonalright",
+        pawn,
+        0
+      ) + 1 === winCondition
     );
   }
 
