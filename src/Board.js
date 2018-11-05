@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Player from "./Player";
+import { getColor } from "./Player";
 import "./App.css";
 
 class Board extends Component {
@@ -43,7 +43,7 @@ class Cell extends Component {
     return (
       <td className="pawn">
         <div
-          className={"circle " + Player.getColor(this.props.pawn)}
+          className={"circle " + getColor(this.props.pawn)}
           onClick={
             this.props.pawn === 0
               ? () => this.props.handleMove(this.props.column)
