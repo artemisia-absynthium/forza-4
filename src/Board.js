@@ -5,8 +5,7 @@ import "./App.css";
 class Board extends Component {
   render() {
     return (
-      <table className="board">
-        <tbody>
+      <div className="board">
           {this.props.board.map((pawnsRow, index) => (
             <BoardRow
               key={index}
@@ -15,8 +14,7 @@ class Board extends Component {
               handleMove={this.props.handleMove}
             />
           ))}
-        </tbody>
-      </table>
+      </div>
     );
   }
 }
@@ -24,7 +22,7 @@ class Board extends Component {
 class BoardRow extends Component {
   render() {
     return (
-      <tr>
+      <div className="row">
         {this.props.pawnsRow.map((pawn, index) => (
           <Cell
             key={this.props.row + index}
@@ -33,7 +31,7 @@ class BoardRow extends Component {
             handleMove={this.props.handleMove}
           />
         ))}
-      </tr>
+      </div>
     );
   }
 }
@@ -41,16 +39,14 @@ class BoardRow extends Component {
 class Cell extends Component {
   render() {
     return (
-      <td className="pawn">
         <div
-          className={"circle " + getColor(this.props.pawn)}
+          className={"pawn circle " + getColor(this.props.pawn)}
           onClick={
             this.props.pawn === 0
               ? () => this.props.handleMove(this.props.column)
               : null
           }
         />
-      </td>
     );
   }
 }
