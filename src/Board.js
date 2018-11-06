@@ -39,6 +39,8 @@ class BoardRow extends Component {
 class Cell extends Component {
   render() {
     return (
+      <div>
+        <div className="cage" />
         <div
           className={"pawn circle " + getColor(this.props.pawn)}
           onClick={
@@ -47,6 +49,7 @@ class Cell extends Component {
               : null
           }
         />
+      </div>
     );
   }
 }
