@@ -41,7 +41,6 @@ body {
   display: flex;
   flex-direction: column;
   border: 5px solid steelblue;
-  background: steelblue;
 }
 
 .row {
@@ -49,8 +48,9 @@ body {
 }
 
 .pawn {
+  position: relative;
   cursor: pointer;
-  margin: 3px;
+  z-index: 1;
 }
 
 .redcolor {
@@ -64,25 +64,35 @@ body {
 .circle {
   width: 50px;
   height: 50px;
-  background: #282c34;
   border-radius: 50%;
 }
 
+.cage {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+  background: radial-gradient(circle at center, transparent 63%, steelblue 63%);
+  pointer-events: none;
+}
+
 @keyframes drop-red {
-  0% {background-color:282c34;}
-  100% {background-color:red;}
+  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vw;}
+  10% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -50vw;}
+  100% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -0vw;}
 }
 
 @keyframes drop-yellow {
-  0% {background-color:282c34;}
-  100% {background-color:yellow;}
+  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vw;}
+  10% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -50vw;}
+  100% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -0vw;}
 }
 
-.circle.redbg {
+.redbg {
   animation: drop-red 0.5s ease both;
 }
 
-.circle.yellowbg {
+.yellowbg {
   animation: drop-yellow 0.5s ease both;
 }
 
