@@ -6,14 +6,54 @@ const boardRows = 6;
 const boardColumns = 7;
 const winCondition = 4;
 
+function isOutsideBoard(max) {
+  return (index) => index < 0 || index >= max;
+}
+
+const rowIsOutsideBoard = isOutsideBoard(boardRows);
+const columnIsOutsideBoard = isOutsideBoard(boardColumns);
+
+function getNextRow(row, direction) {
+  switch (direction) {
+    case "left":
+    case "right":
+      return row;
+    case "vertical":
+    case "downdiagonalright":
+    case "updiagonalleft":
+      return row + 1;
+    case "downdiagonalleft":
+    case "updiagonalright":
+      return row - 1;
+    default:
+      throw new IllegalArgumentException(
+        "Unknown direction: '" + direction + "'"
+      );
+  }
+}
+
+function getNextColumn(column, direction) {
+  switch (direction) {
+    case "vertical":
+      return column;
+    case "left":
+    case "downdiagonalleft":
+    case "updiagonalleft":
+      return column - 1;
+    case "right":
+    case "downdiagonalright":
+    case "updiagonalright":
+      return column + 1;
+    default:
+      throw new IllegalArgumentException(
+        "Unknown direction: '" + direction + "'"
+      );
+  }
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
-    // let pawns = Array(props.rows);
-    // for (let i = 0; i < pawns.length; i++) {
-    //     let column = Array(this.props.columns);
-    //     pawns[i] = column.fill(0);
-    // }
     this.state = this.initState();
     this.endGame = this.endGame.bind(this);
     this.newGame = this.newGame.bind(this);
@@ -69,116 +109,27 @@ class App extends Component {
   endGame(row, column) {
     let pawn = this.state.board[row][column];
     return (
-      this.countConsecutivePawns(
-        this.getNextRow(row, "right"),
-        this.getNextColumn(column, "right"),
-        "right",
-        pawn,
-        0
-      ) + this.countConsecutivePawns(
-        this.getNextRow(row, "left"),
-        this.getNextColumn(column, "left"),
-        "left",
-        pawn,
-        0
-      ) + 1 === winCondition ||
-      this.countConsecutivePawns(
-        this.getNextRow(row, "vertical"),
-        this.getNextColumn(column, "vertical"),
-        "vertical",
-        pawn,
-        0
-      ) + 1 === winCondition ||
-      this.countConsecutivePawns(
-        this.getNextRow(row, "downdiagonalleft"),
-        this.getNextColumn(column, "downdiagonalleft"),
-        "downdiagonalleft",
-        pawn,
-        0
-      ) + this.countConsecutivePawns(
-        this.getNextRow(row, "downdiagonalright"),
-        this.getNextColumn(column, "downdiagonalright"),
-        "downdiagonalright",
-        pawn,
-        0
-      ) + 1 === winCondition ||
-      this.countConsecutivePawns(
-        this.getNextRow(row, "updiagonalleft"),
-        this.getNextColumn(column, "updiagonalleft"),
-        "updiagonalleft",
-        pawn,
-        0
-      ) + this.countConsecutivePawns(
-        this.getNextRow(row, "updiagonalright"),
-        this.getNextColumn(column, "updiagonalright"),
-        "updiagonalright",
-        pawn,
-        0
-      ) + 1 === winCondition
+      this.countConsecutivePawns(row, column, "right", pawn, 0) +
+      this.countConsecutivePawns(row, column, "left", pawn, 0) + 1 === winCondition ||
+      this.countConsecutivePawns(row, column, "vertical", pawn, 0) + 1 === winCondition ||
+      this.countConsecutivePawns(row, column, "downdiagonalleft", pawn, 0) +
+      this.countConsecutivePawns(row, column, "downdiagonalright", pawn, 0) + 1 === winCondition ||
+      this.countConsecutivePawns(row, column, "updiagonalleft", pawn, 0) +
+      this.countConsecutivePawns(row, column, "updiagonalright", pawn, 0) + 1 === winCondition
     );
   }
 
   countConsecutivePawns(row, column, direction, color, pawns) {
+    const nextRow = getNextRow(row, direction);
+    const nextColumn = getNextColumn(column, direction);
     if (
-      this.rowIsOutsideBoard(row, this.state.board) ||
-      this.columnIsOutsideBoard(column, this.state.board[row]) ||
-      this.state.board[row][column] !== color
+      rowIsOutsideBoard(nextRow) ||
+      columnIsOutsideBoard(nextColumn) ||
+      this.state.board[nextRow][nextColumn] !== color
     ) {
       return pawns;
     }
-    return this.countConsecutivePawns(
-      this.getNextRow(row, direction),
-      this.getNextColumn(column, direction),
-      direction,
-      color,
-      pawns + 1
-    );
-  }
-
-  rowIsOutsideBoard(row, board) {
-    return row < 0 || row >= board.length;
-  }
-
-  columnIsOutsideBoard(column, board) {
-    return column < 0 || column >= board.length;
-  }
-
-  getNextRow(row, direction) {
-    switch (direction) {
-      case "left":
-      case "right":
-        return row;
-      case "vertical":
-      case "downdiagonalright":
-      case "updiagonalleft":
-        return row + 1;
-      case "downdiagonalleft":
-      case "updiagonalright":
-        return row - 1;
-      default:
-        throw new IllegalArgumentException(
-          "Unknown direction: '" + direction + "'"
-        );
-    }
-  }
-
-  getNextColumn(column, direction) {
-    switch (direction) {
-      case "vertical":
-        return column;
-      case "left":
-      case "downdiagonalleft":
-      case "updiagonalleft":
-        return column - 1;
-      case "right":
-      case "downdiagonalright":
-      case "updiagonalright":
-        return column + 1;
-      default:
-        throw new IllegalArgumentException(
-          "Unknown direction: '" + direction + "'"
-        );
-    }
+    return this.countConsecutivePawns(nextRow, nextColumn, direction, color, pawns + 1);
   }
 
   newGame() {
