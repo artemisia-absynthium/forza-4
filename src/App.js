@@ -90,7 +90,7 @@ class App extends Component {
   }
 }
 
-function RestartButton(props) {
+const RestartButton = React.memo(function RestartButton(props) {
   const show = props.show;
   if (!show) {
     return null;
@@ -100,6 +100,6 @@ function RestartButton(props) {
       New Game
     </button>
   );
-}
+});
 
 export default App;
