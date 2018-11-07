@@ -3,10 +3,6 @@ import { meetsWinCondition } from "./boardUtils"
 import React, { Component } from "react";
 import "./App.css";
 
-const boardRows = 6;
-const boardColumns = 7;
-const winCondition = 4;
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -63,10 +59,10 @@ class App extends Component {
 
   endGame(row, column) {
     return (
-      meetsWinCondition("horizontal", row, column, this.state.board, winCondition) ||
-      meetsWinCondition("vertical", row, column, this.state.board, winCondition) ||
-      meetsWinCondition("downdiagonal", row, column, this.state.board, winCondition) ||
-      meetsWinCondition("updiagonal", row, column, this.state.board, winCondition)
+      meetsWinCondition("horizontal", row, column, this.state.board) ||
+      meetsWinCondition("vertical", row, column, this.state.board) ||
+      meetsWinCondition("downdiagonal", row, column, this.state.board) ||
+      meetsWinCondition("updiagonal", row, column, this.state.board)
     );
   }
 

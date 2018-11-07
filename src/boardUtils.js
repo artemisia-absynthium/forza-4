@@ -1,4 +1,8 @@
-export function meetsWinCondition(direction, row, column, board, winCondition) {
+export const boardRows = 6;
+export const boardColumns = 7;
+export const winCondition = 4;
+
+export function meetsWinCondition(direction, row, column, board) {
   const pawn = board[row][column]
   switch (direction) {
     case "horizontal":
@@ -21,8 +25,8 @@ function countConsecutivePawns(board, row, column, direction, color, pawns) {
   const nextRow = getNextRow(row, direction);
   const nextColumn = getNextColumn(column, direction);
   if (
-    isOutsideBoard(nextRow, board.length) ||
-    isOutsideBoard(nextColumn, board[row].length) ||
+    isOutsideBoard(nextRow, boardRows) ||
+    isOutsideBoard(nextColumn, boardColumns) ||
     board[nextRow][nextColumn] !== color
   ) {
     return pawns;
