@@ -77,23 +77,27 @@ body {
 }
 
 @keyframes drop-red {
-  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vw;}
-  10% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -50vw;}
-  100% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -0vw;}
+  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vh;}
+  15% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -50vh;}
+  100% {background: radial-gradient(circle at center, red 70%, transparent 70%); top: -0vh;}
 }
 
 @keyframes drop-yellow {
-  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vw;}
-  10% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -50vw;}
-  100% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -0vw;}
+  0% {background: radial-gradient(circle at center, transparent 70%, transparent 70%); top: -50vh;}
+  15% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -50vh;}
+  100% {background: radial-gradient(circle at center, yellow 70%, transparent 70%); top: -0vh;}
+}
+
+.redbg, .yellowbg {
+  animation: 0.5s ease-in both;
 }
 
 .redbg {
-  animation: drop-red 0.5s ease both;
+  animation-name: drop-red;
 }
 
 .yellowbg {
-  animation: drop-yellow 0.5s ease both;
+  animation-name: drop-yellow;
 }
 
 button {
