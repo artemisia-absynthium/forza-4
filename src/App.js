@@ -1,5 +1,5 @@
 import Board, { BoardOutOfBoundsException } from "./Board";
-import { meetsWinCondition } from "./boardUtils"
+import { meetsWinCondition } from "./boardUtils";
 import React, { Component } from "react";
 import "./App.css";
 
@@ -93,10 +93,10 @@ class App extends Component {
 const RestartButton = React.memo(function RestartButton(props) {
   const show = props.show;
   if (!show) {
-    return null;
+    return <button className="placeholder">New Game</button>;
   }
   return (
-    <button type="button" onClick={props.handleClick}>
+    <button type="button" className="active" onClick={props.handleClick}>
       New Game
     </button>
   );
