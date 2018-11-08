@@ -6,14 +6,14 @@ class Board extends Component {
   render() {
     return (
       <div className="board">
-          {this.props.board.map((pawnsRow, index) => (
-            <BoardRow
-              key={index}
-              row={index}
-              pawnsRow={pawnsRow}
-              handleMove={this.props.handleMove}
-            />
-          ))}
+        {this.props.board.map((pawnsRow, index) => (
+          <BoardRow
+            key={index}
+            row={index}
+            pawnsRow={pawnsRow}
+            handleMove={this.props.handleMove}
+          />
+        ))}
       </div>
     );
   }
